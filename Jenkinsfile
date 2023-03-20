@@ -1,5 +1,5 @@
-podTemplate(name: 'jenkins-agent', cloud: 'kubernetes',
-  namespace: 'devops-tools', label: '',
+podTemplate(name: 'jenkins-slave', cloud: 'kubernetes',
+  namespace: 'devops-tools', label: 'jenkinspod',
   serviceAccount: 'default', containers: [
   containerTemplate(
       name: 'jenkins-slave',
@@ -9,7 +9,8 @@ podTemplate(name: 'jenkins-agent', cloud: 'kubernetes',
       privileged: false,
       alwaysPullImage:true,
       )
-  ])
+  ]
+  )
 
 {
   node('jenkins-slave')
