@@ -1,5 +1,5 @@
 podTemplate(name: 'jenkins-slave', cloud: 'kubernetes',
-  namespace: 'devops-tools', label: 'jenkinspod',
+  namespace: 'devops-tools', label: ,
   serviceAccount: 'default', containers: [
   containerTemplate(
       name: 'jenkins-slave',
