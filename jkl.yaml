@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: java-demo
 spec:
-  replicas: REPLICAS
+  replicas: 1
   selector:
     matchLabels:
       project: www
