@@ -1,5 +1,6 @@
 podTemplate(containers: [
     containerTemplate(name: 'maven', image: 'sunrdocker/jdk17-git-maven-docker-focal', command: 'sleep', args: '99d')
+    containerTemplate(name: 'kubectl', image: 'uhub.service.ucloud.cn/uk8sdemo/kubectl:latest', command: 'cat', ttyEnabled: true),
   ],
   yaml: """\
 apiVersion: v1
@@ -50,6 +51,23 @@ spec:
                     echo 'Hello kaniko'
                     sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination dennnys/pipeline:v2"
                 }
+            }
+        }
+        stage('Y A M L')
+        {
+
+        }
+        stage('Deploy Into Pod')
+        {
+            container('kubectl')
+            {
+                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')])
+                {
+                     echo 'Check kubernetes pods'
+                     sh 'mkdir -p ~/.kube && cp ${KUBECONFIG} ~/.kube/config'
+                     sh 'kubectl get pods'
+                }
+
             }
         }
 
