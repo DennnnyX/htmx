@@ -1,11 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: java-demo
-spec:
-  replicas: 1
+kind: Deployment   #deployment控制副本
+metadata:          #定义资源的元数据信息，比如名称、命名空间
+  name: java-demo  #名称在同一个命名空间中必须唯一
+spec:              #定义deploy副本的属性
+  replicas: 1      #副本同时存在数量
   selector:
-    matchLabels:
+    matchLabels:   #定义匹配标签
       project: www
       app: java-demo
   template:
@@ -13,13 +13,13 @@ spec:
       labels:
         project: www
         app: java-demo
-    spec:
+    spec:          #定义副本加载的容器的属性
       imagePullSecrets:
         - name: java-demo
       containers:
         - image: dennnys/pipeline:v1.1
           name: java-demo
-          resources:
+          resources:  #资源
             requests:
               cpu: 0.5
               memory: 500Mi
@@ -42,15 +42,15 @@ spec:
 
 ---
 apiVersion: v1
-kind: Service
+kind: Service   #定义服务yaml文件
 metadata:
-  name: java-demo
+  name: HTMX  #定义服务名称
 spec:
   selector:
     project: www
     app: java-demo
-  type: NodePort
+  type: NodePort  #service的访问类型是nodeport
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
+      port: 80   #service监听80端口
+      targetPort: 8080   #转发的端口号是8080
