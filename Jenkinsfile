@@ -1,6 +1,6 @@
 podTemplate(containers: [
-    containerTemplate(name: 'maven', image: 'sunrdocker/jdk17-git-maven-docker-focal', command: 'sleep', args: '99d')
-    containerTemplate(name: 'kubectl', image: 'uhub.service.ucloud.cn/uk8sdemo/kubectl:latest', command: 'cat', ttyEnabled: true),
+    containerTemplate(name: 'maven', image: 'sunrdocker/jdk17-git-maven-docker-focal', command: 'cat', ttyEnabled: 'true'),
+    containerTemplate(name: 'kubectl', image: 'uhub.service.ucloud.cn/uk8sdemo/kubectl:latest', command: 'cat', ttyEnabled: 'true'),
   ],
   yaml: """\
 apiVersion: v1
@@ -38,6 +38,8 @@ spec:
             {
                 stage('mvn packaging')
                 {
+                    sh 'java -version'
+                    sh 'mvn -version'
                     sh 'mvn clean package'
                 }
             }
@@ -48,25 +50,22 @@ spec:
             {
                 stage('Build With Kaniko')
                 {
-                    echo 'Hello kaniko'
+                    echo 'Hello Kaniko'
+                    echo 'Using Kaniko to Build Image'
                     sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination dennnys/pipeline:v1.1"
                 }
             }
         }
-        stage('Y A M L')
-        {
-
-        }
         stage('Deploy Into Pod')
         {
             container('kubectl')
-            {
+            {   //定义jenkins中的k8s config文件为变量名KUBE
                 withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')])
                 {
                      echo 'Check kubernetes pods'
-                     sh 'mkdir -p ~/.kube && cp ${KUBECONFIG} ~/.kube/config'
+                     sh 'mkdir -p ~/.kube && cp ${KUBECONFIG} ~/.kube/config' //拷贝k8s的credentional文件到新pod的目录下
                      sh 'kubectl get pods'
-                     sh 'kubectl apply -f k8s.yaml'
+                     sh 'kubectl apply -f deploy.yaml'
                 }
 
             }
