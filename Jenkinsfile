@@ -49,7 +49,7 @@ spec:
                 stage('Build With Kaniko')
                 {
                     echo 'Hello kaniko'
-                    sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination dennnys/pipeline:v2"
+                    sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination dennnys/pipeline:v1.1"
                 }
             }
         }
@@ -66,6 +66,7 @@ spec:
                      echo 'Check kubernetes pods'
                      sh 'mkdir -p ~/.kube && cp ${KUBECONFIG} ~/.kube/config'
                      sh 'kubectl get pods'
+                     sh 'kubectl apply -f k8s.yaml'
                 }
 
             }
