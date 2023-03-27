@@ -66,6 +66,8 @@ spec:
                      sh 'mkdir -p ~/.kube && cp ${KUBECONFIG} ~/.kube/config' //拷贝k8s的credentional文件到新pod的目录下
                      sh 'kubectl get pods'
                      sh 'kubectl apply -f deploy.yaml'
+                     sh 'kubectl get pods -n devops-tools'
+                     sh 'kubectl get svc -n devops-tools'
                 }
 
             }

@@ -26,16 +26,6 @@ spec:              #定义deploy副本的属性
             limits:
               cpu: 1
               memory: 1Gi
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8080
-            initialDelaySeconds: 50
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8080
             initialDelaySeconds: 50
             periodSeconds: 10
 
