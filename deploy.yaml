@@ -39,5 +39,5 @@ spec:
   type: NodePort  #service的访问类型是nodeport
   ports:
     - protocol: TCP
-      port: 80   #service监听80端口
-      targetPort: 8080   #转发的端口号是8080
+      port: 8080   #service监听80端口
+      targetPort: 31529   #转发的端口号是8080
