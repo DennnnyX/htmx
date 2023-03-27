@@ -38,5 +38,6 @@ spec:
     app: java-demo
   type: NodePort  #service的访问类型是nodeport
   ports:
-    - port: 8081   #service监听8080端口
-      nodePort: 31529   #转发的端口号是8080
+    - protocol: TCP
+      port: 8080   #service监听8080端口
+      targetPort: 8080   #转发的端口号是8080
