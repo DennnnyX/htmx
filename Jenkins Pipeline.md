@@ -217,19 +217,19 @@ Kubectl exec -it podName cat /var/jenkins_home/secrets/initialAdminPassword -n d
 
     After unlock jenkins, we need to install some basic plugins. These plugins help us pull code from github repo and deploy into a kubernetes pod with pipeline. Maven plugin is  needed for java project. 
 
-![](C:\Users\I528814\AppData\Roaming\marktext\images\2023-04-30-08-05-06-image.png)
+![](https://github.com/DennnnyX/htmx/blob/main/img/2023-04-30-08-05-06-image.png)
 
     github plugin configuration. This plugin helps us configure connection between kubernetes and github.
 
-![](C:\Users\I528814\AppData\Roaming\marktext\images\2023-04-30-08-07-18-image.png)
+![](https://github.com/DennnnyX/htmx/blob/main/img/2023-04-30-08-07-18-image.png)
 
     kubernetes plugin configuration. This plugin can set up kubernetes in jenkins.
 
-![](C:\Users\I528814\AppData\Roaming\marktext\images\2023-04-30-08-07-50-image.png)
+![](https://github.com/DennnnyX/htmx/blob/main/img/2023-04-30-08-07-50-image.png)
 
-![](C:\Users\I528814\AppData\Roaming\marktext\images\2023-04-30-08-08-06-image.png)
+![](https://github.com/DennnnyX/htmx/blob/main/img/2023-04-30-08-08-06-image.png)
 
-![](C:\Users\I528814\AppData\Roaming\marktext\images\2023-04-30-08-08-18-image.png)
+![](https://github.com/DennnnyX/htmx/blob/main/img/2023-04-30-08-08-18-image.png)
 
     Here jenkins URL stands for the access point for Jenkins service. We use nodeport to set up kubernetes connection, so we use jenkins service IP for jenkins URL.
 
@@ -243,7 +243,7 @@ kubectl get svc -n devops-tools -o wide # get jenkins service IP
 kubectl get pods -n devops-tools -o wide # get jenkins pod IP
 ```
 
-![](C:\Users\I528814\AppData\Roaming\marktext\images\2023-04-30-08-12-12-image.png)
+![](https://github.com/DennnnyX/htmx/blob/main/img/2023-04-30-08-12-12-image.png)
 
 ## podTemplate introduction
 
